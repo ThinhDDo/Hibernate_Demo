@@ -1,2 +1,5 @@
+dao\SachDAO.class
+entities\TheLoai.class
 main\Main.class
 entities\Sach.class
+dao\ISach.class

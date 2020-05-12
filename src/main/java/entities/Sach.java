@@ -6,11 +6,15 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -19,21 +23,15 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "sach", schema="library")
-public class Sach implements Serializable{
+public class Sach {
     
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MASACH", unique=true)
     private int masach;
-    @Column(name = "TENSACH", nullable=false)
     private String tensach;
-    @Column(name = "GIA", nullable=false)
     private float gia;
-    @Column(name = "SOLUONG", nullable=false)
     private int soluong;
-
+    
+    private List<TheLoai> categories = new ArrayList<TheLoai>();
+    
     /**
      * Default Constructor
      */
@@ -52,6 +50,9 @@ public class Sach implements Serializable{
         this.soluong = soluong;
     }
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "MASACH", unique=true)
     public int getMasach() {
         return masach;
     }
@@ -61,6 +62,7 @@ public class Sach implements Serializable{
     }
     
     
+    @Column(name = "TENSACH", nullable=false)
     public String getTensach() {
         return tensach;
     }
@@ -70,6 +72,7 @@ public class Sach implements Serializable{
     }
 
     
+    @Column(name = "GIA", nullable=false)
     public float getGia() {
         return gia;
     }
@@ -79,12 +82,22 @@ public class Sach implements Serializable{
     }
 
     
+    @Column(name = "SOLUONG", nullable=false)
     public int getSoluong() {
         return soluong;
     }
 
     public void setSoluong(int soluong) {
         this.soluong = soluong;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "books")
+    public List<TheLoai> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<TheLoai> categories) {
+        this.categories = categories;
     }
 
     @Override
