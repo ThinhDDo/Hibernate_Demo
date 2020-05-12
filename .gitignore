@@ -1,5 +1,6 @@
 ### Maven
 # folders
-/target/
+target/
 # Classes
-*.class
+**.class
+target/**.class
