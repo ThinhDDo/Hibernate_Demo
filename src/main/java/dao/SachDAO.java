@@ -8,30 +8,40 @@ package dao;
 
 import entities.Sach;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  *
  * @author doduy
  */
-public class SachDAO implements ISach {
+public class SachDAO {
     
-    @Override
-    public List<Sach> getAll() {
+    public static List<Sach> getAll() {
+        EntityManager em = EntityFactory.getEntityManager();
+        
+        TypedQuery<Sach> query = em.createQuery("select c from Sach c", Sach.class);
+        
+        List<Sach> listSach = query.getResultList();
+        
+        em.close();
+        return listSach;
+    }
+
+    
+    public static Sach getBookById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Sach getBookById(int id) {
+    
+    public static void deleteSach(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void deleteSach(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void update(Sach sach) {
+    
+    public static void update(Sach sach) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

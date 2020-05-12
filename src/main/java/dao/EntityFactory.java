@@ -3,23 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package dao;
 
-import entities.Sach;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 /**
  *
  * @author doduy
  */
-public class Main {
+public class EntityFactory {
+    private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("LibraryDB");
     
-    public static void main(String[] args) {
-        
+    public static EntityManager getEntityManager()  {
+        return FACTORY.createEntityManager();
+    }
+    
+    public static void closeFactory() {
+        FACTORY.close();
     }
 }
